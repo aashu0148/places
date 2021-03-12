@@ -3,12 +3,15 @@ import { NavLink, Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 
+import NewModal from "../modal/New";
 import "./Navbar.css";
 let navbar, navbarCont, myTimer;
+
 class Navbar extends Component {
   state = {
     mobile: window.innerWidth < 600,
     open: false,
+    showModal: false,
   };
   componentDidMount() {
     navbarCont.style.height = `${navbar.offsetHeight}px`;
@@ -24,9 +27,13 @@ class Navbar extends Component {
     window.addEventListener("resize", () => {
       debounce(this);
     });
-
     return (
       <div ref={(el) => (navbarCont = el)} className="navbar_cont">
+        <NewModal
+          show={this.state.showModal}
+          hide={() => this.setState({ showModal: false })}
+        />
+
         <div ref={(el) => (navbar = el)} className="navbar">
           <Link style={{ textDecoration: "none", color: "#000" }} to="/">
             <div className="navbar_logo">Places</div>
@@ -59,7 +66,7 @@ class Navbar extends Component {
               <NavLink to="/">My Places</NavLink>
             </li>
             <li>
-              <NavLink to="/">New</NavLink>
+              <a onClick={() => this.setState({ showModal: true })}>New</a>
             </li>
             <li>
               <NavLink to="/login">Login</NavLink>

@@ -1,0 +1,77 @@
+.modal_new{
+    padding:20px;
+    width:70%;
+    max-width:700px;
+    position: absolute;
+    left:15%;
+    top:-100%;
+    z-index: 500;
+    background: #fff;
+    border:1px solid ;
+    transition: 300ms;
+}
+.modal_new_show{
+    top:15% !important;
+}
+.modal_new_head{
+    font-size: 2rem;
+}
+.modal_new_form{
+display: flex;
+flex-wrap: wrap;
+justify-content:space-evenly;
+align-items: center;
+}
+.form-elem {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.form-elem label {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+.form-elem input , .form-elem textarea {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: transparent;
+  outline: none;
+  transition: 400ms;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  margin:2px;
+  min-width: 250px;
+  border: 1px solid rgb(156, 156, 156);
+}
+.form-elem textarea{
+    height:100px;
+    width:100%;
+}
+.form-elem input:focus ,.form-elem textarea:focus{
+  border: 1px solid #000;
+}
+.form-elem input::placeholder {
+  font-size: 0.8rem;
+}
+.modal_new_buttons{
+    align-items: baseline;
+    display: flex;
+}
+.modal_new_buttons button , .modal_new_buttons div{
+    padding:10px;
+    outline: none;
+    border: none;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    height:fit-content;
+    background:#00bcd4;
+    margin:5px;
+    user-select: none;
+}
+.modal_new_buttons .btn-close{
+    background: #aca9a9;
+}

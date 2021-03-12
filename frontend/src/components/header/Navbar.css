@@ -26,6 +26,8 @@
 .navbar_list li a{
     padding:8px;
     text-decoration: none;
+    color:black;
+    cursor: pointer;
 }
 
 /* ****************************************************** */

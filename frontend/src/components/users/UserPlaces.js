@@ -5,7 +5,6 @@ import Post from "../body/Post";
 import "./UserPlaces.css";
 
 function UserPlaces(props) {
-  console.log(props);
   return (
     <div className="userPlaces">
       <div className="userPlaces_head">
