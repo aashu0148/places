@@ -7,7 +7,7 @@
     margin :10px auto;
 }
 .post_head{
-    width:500px;
+    width:95%;
     margin: 0 auto;
     position:relative;
 }
@@ -57,4 +57,17 @@
     background-color: gray;
     top:0;
     right:95%;
+}
+
+/* ************************************** */
+@media (max-width:600px){
+    .post{
+        width:400px;
+        padding:5px;
+    }
+}
+@media (max-width:400px){
+    .post{
+        width:360px;
+    }
 }

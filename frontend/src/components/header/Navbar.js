@@ -14,7 +14,6 @@ class Navbar extends Component {
     navbarCont.style.height = `${navbar.offsetHeight}px`;
   }
   render() {
-    console.log("render called");
     function debounce(context) {
       clearTimeout(myTimer);
       myTimer = setTimeout(() => {
@@ -51,6 +50,9 @@ class Navbar extends Component {
                 : "navbar_list"
             }
           >
+            <li>
+              <NavLink to="/users">All users</NavLink>
+            </li>
             <li>
               <NavLink to="/">My Places</NavLink>
             </li>
