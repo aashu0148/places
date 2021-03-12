@@ -21,7 +21,7 @@ function Post(props) {
             <HeartHollowIcon color="secondary" />
           )}
         </div>
-        <img src={props.image} alt="Place image" />
+        <img src={props.image} alt="Place Pic" />
       </div>
       <div className="post_footer">
         <div className="post_footer-user">
@@ -34,6 +34,10 @@ function Post(props) {
         <div className="post_footer-location">
           <RoomIcon color="secondary" />
         </div>
+      </div>
+      <br />
+      <div className="post_sub-footer">
+        <b>Adress :</b> {props.address}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -28,7 +28,9 @@ class Navbar extends Component {
     return (
       <div ref={(el) => (navbarCont = el)} className="navbar_cont">
         <div ref={(el) => (navbar = el)} className="navbar">
-          <div className="navbar_logo">Places</div>
+          <Link style={{ textDecoration: "none", color: "#000" }} to="/">
+            <div className="navbar_logo">Places</div>
+          </Link>
           {this.state.mobile ? (
             <div
               className="navbar_burger"

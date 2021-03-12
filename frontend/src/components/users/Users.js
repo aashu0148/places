@@ -11,7 +11,8 @@ function Users() {
       <div className="users_search">
         <input
           type="text"
-          placeholder="search user"
+          placeholder="Search user"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <div className="users_search-btn">
