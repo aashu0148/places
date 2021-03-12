@@ -14,18 +14,15 @@ class Navbar extends Component {
     navbarCont.style.height = `${navbar.offsetHeight}px`;
   }
   render() {
-    function updateState(context) {
-      context.setState({ mobile: window.innerWidth < 600 });
-    }
+    console.log("render called");
     function debounce(context) {
       clearTimeout(myTimer);
       myTimer = setTimeout(() => {
-        updateState(context);
+        context.setState({ mobile: window.innerWidth < 600 });
       }, 500);
     }
 
     window.addEventListener("resize", () => {
-      console.log(this.state.mobile);
       debounce(this);
     });
 
