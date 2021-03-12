@@ -12,7 +12,17 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/users/:uid" component={UserPlaces} />
+          <Route
+            path="/users/:uid"
+            render={(props) => {
+              return (
+                <>
+                  <Navbar />
+                  <UserPlaces {...props} />
+                </>
+              );
+            }}
+          />
           <Route path="/users" exact>
             <Navbar />
             <Users />
