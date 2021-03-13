@@ -31,16 +31,25 @@ function Map(props) {
   }, []);
 
   const content = (
-    <div className={props.show ? "modal_map modal_map-active" : "modal_map"}>
-      <div className="modal_map_head">Map</div>
-      {props.long && props.lat ? (
-        <div ref={mapContainer} className="modal_map_body"></div>
-      ) : (
-        <h2>No coordinates found :(</h2>
-      )}
+    <div
+      className={
+        props.show
+          ? "modal_map-backdrop modal_map-backdrop-active"
+          : "modal_map-backdrop"
+      }
+      onClick={props.hide}
+    >
+      <div className="modal_map" onClick={(e) => e.stopPropagation()}>
+        <div className="modal_map_head">Map</div>
+        {props.long && props.lat ? (
+          <div ref={mapContainer} className="modal_map_body"></div>
+        ) : (
+          <h2>No coordinates found :(</h2>
+        )}
 
-      <div className="modal_map-close" onClick={props.hide}>
-        Close
+        <div className="modal_map-close" onClick={props.hide}>
+          Close
+        </div>
       </div>
     </div>
   );

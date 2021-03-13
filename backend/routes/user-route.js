@@ -7,12 +7,14 @@ const users = [
     id: "uid_1",
     name: "John",
     places: ["pid_2"],
+    fav: [],
     userPhoto: "",
   },
   {
     id: "uid_2",
     name: "sonu",
     places: ["pid_1"],
+    fav: ["pid_2"],
     userPhoto: "",
   },
 ];

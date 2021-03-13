@@ -19,7 +19,7 @@ const places = [
   {
     id: "pid_2",
     title: "Taj Mahal",
-    desc: `The TAJ MAHAL is an ivory-white marble mausoleum on the southern bank of the river Yamuna in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan (reigned from 1628 to 1658) to house the tomb of his favourite wife`,
+    desc: `The TAJ MAHAL is an ivory-white marble mausoleum on the southern bank of the river Yamuna in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan (reigned from 1628 to 1658) to house the tomb of his favourite wife.`,
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Taj_Mahal_in_India_-_Kristian_Bertel.jpg/220px-Taj_Mahal_in_India_-_Kristian_Bertel.jpg",
     address: "Number One, Man Singh Rd, New Delhi, Delhi 110001",
