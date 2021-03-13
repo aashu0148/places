@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 import "./New.css";
-
 function New(props) {
+  const [currChar, setcurrChar] = useState(0);
+
   const submission = (e) => {
     e.preventDefault();
     console.log("In submission");
@@ -33,11 +34,19 @@ function New(props) {
           </div>
           <div className="form-elem">
             <label>Image URL</label>
-            <input placeholder="Enter Image url" type="text"></input>
+            <input placeholder="Enter Image url" type="text" required></input>
           </div>
           <div className="form-elem">
-            <label>Description</label>
-            <textarea placeholder="Enter Description"></textarea>
+            <label>
+              Description{" "}
+              <span style={{ fontSize: "0.7rem" }}>{currChar}/200</span>
+            </label>
+            <textarea
+              placeholder="Enter Description"
+              maxLength="200"
+              required
+              onChange={(e) => setcurrChar(e.target.value.length)}
+            ></textarea>
           </div>
           <div className="form-elem">
             <label>Location</label>
@@ -46,7 +55,7 @@ function New(props) {
           </div>
           <div className="form-elem">
             <label>Address</label>
-            <input placeholder="Enter address" type="text"></input>
+            <input placeholder="Enter address" type="text" required></input>
           </div>
 
           <div className="modal_new_buttons">

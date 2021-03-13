@@ -33,7 +33,7 @@ const places = [
 
 router.get("/:pid", (req, res, next) => {
   const pid = req.params.pid;
-  const result = places.filter((place) => place.id == pid);
+  const result = places.find((place) => place.id == pid);
   res.json(result);
 });
 router.get("/", (req, res, next) => {

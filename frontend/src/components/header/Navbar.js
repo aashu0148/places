@@ -63,7 +63,7 @@ class Navbar extends Component {
               <NavLink to="/users">All users</NavLink>
             </li>
             <li>
-              <NavLink to="/">My Places</NavLink>
+              <NavLink to="/my-places">My Places</NavLink>
             </li>
             <li>
               <a onClick={() => this.setState({ showModal: true })}>New</a>
