@@ -34,7 +34,7 @@ class Navbar extends Component {
           hide={() => this.setState({ showModal: false })}
         />
 
-        <div ref={(el) => (navbar = el)} className="navbar">
+        <div ref={(el) => (navbar = el)} id="navbar" className="navbar">
           <Link style={{ textDecoration: "none", color: "#000" }} to="/">
             <div className="navbar_logo">Places</div>
           </Link>

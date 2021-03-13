@@ -1,10 +1,12 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 
-const app = express();
+const placeRoute = require("./routes/place-route");
+const userRoute = require("./routes/user-route");
 
-app.use("/", (req, res, next) => {
-  res.send("<h1> It works </h1>");
-});
+const app = express();
+// app.use("/", bodyParser.json());
+app.use("/places", placeRoute);
+app.use("/users", userRoute);
 
 app.listen(5000);

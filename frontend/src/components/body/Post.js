@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Map from "../modal/Map";
 
 import RoomIcon from "@material-ui/icons/Room";
 import HeartHollowIcon from "@material-ui/icons/FavoriteBorder";
@@ -10,9 +11,16 @@ import "./Post.css";
 
 function Post(props) {
   const [fav, setFav] = useState(props.fav);
+  const [mapOpen, setMapOpen] = useState(false);
 
   return (
     <div className="post">
+      <Map
+        long={props.location.long}
+        lat={props.location.lat}
+        show={mapOpen}
+        hide={() => setMapOpen(false)}
+      />
       <div className="post_head">
         <div onClick={() => setFav(!fav)} className="post_favorite">
           {fav ? (
@@ -31,7 +39,7 @@ function Post(props) {
           <h2 className="post_title">{props.title}</h2>
           <p className="post_desc">{props.desc}</p>
         </div>
-        <div className="post_footer-location">
+        <div className="post_footer-location" onClick={() => setMapOpen(true)}>
           <RoomIcon color="secondary" />
         </div>
       </div>
