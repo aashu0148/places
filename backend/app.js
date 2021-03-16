@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const placeRoute = require("./routes/place-route");
 const userRoute = require("./routes/user-route");
+const uri = require("./mongoUri");
 const app = express();
 
 app.use(bodyParser.json());
@@ -11,9 +12,7 @@ app.use("/places", placeRoute);
 app.use("/users", userRoute);
 
 mongoose
-  .connect(
-    "mongodb+srv://Aashu:build4mongo@cluster0.wneuf.mongodb.net/places?retryWrites=true&w=majority"
-  )
+  .connect(uri)
   .then(() => {
     console.log("Connected");
     app.listen(5000);
