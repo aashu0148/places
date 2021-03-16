@@ -16,8 +16,8 @@ function Post(props) {
   return (
     <div className="post">
       <Map
-        long={props.location.long}
-        lat={props.location.lat}
+        long={props.location ? props.location.long : ""}
+        lat={props.location ? props.location.lat : ""}
         show={mapOpen}
         hide={() => setMapOpen(false)}
       />

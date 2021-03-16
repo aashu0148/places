@@ -6,6 +6,7 @@ import Main from "./components/body/Main";
 import Users from "./components/users/Users";
 import UserPlaces from "./components/users/UserPlaces";
 import FavPlaces from "./components/body/FavPlaces";
+import Auth from "./components/Auth/Auth";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           <Route path="/my-places" exact>
             <Navbar />
             <FavPlaces />
+          </Route>
+          <Route path="/auth">
+            <Auth />
           </Route>
           <Route path="/">
             <Header />

@@ -4,10 +4,28 @@ import ReactDOM from "react-dom";
 import "./New.css";
 function New(props) {
   const [currChar, setcurrChar] = useState(0);
-
+  let formForm, formAddress, formDesc, formTitle, formLat, formLong, formImage;
   const submission = (e) => {
     e.preventDefault();
-    console.log("In submission");
+    let obj = {
+      title: formTitle.value,
+      desc: formDesc.value,
+      image: formImage.value,
+      location: {
+        long: formLong.value,
+        lat: formLat.value,
+      },
+      address: formAddress.value,
+      author: "dummy",
+    };
+    fetch("/places", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj),
+    }).then((res) => {
+      formForm.reset();
+      window.location.reload(false);
+    });
   };
 
   const content = (
@@ -27,14 +45,28 @@ function New(props) {
       >
         <div className="modal_new_head">Add a Place</div>
 
-        <form className="modal_new_form" onSubmit={(e) => submission(e)}>
+        <form
+          ref={(el) => (formForm = el)}
+          className="modal_new_form"
+          onSubmit={(e) => submission(e)}
+        >
           <div className="form-elem">
             <label>Title</label>
-            <input placeholder="Enter Title" type="text" required></input>
+            <input
+              ref={(el) => (formTitle = el)}
+              placeholder="Enter Title"
+              type="text"
+              required
+            ></input>
           </div>
           <div className="form-elem">
             <label>Image URL</label>
-            <input placeholder="Enter Image url" type="text" required></input>
+            <input
+              ref={(el) => (formImage = el)}
+              placeholder="Enter Image url"
+              type="text"
+              required
+            ></input>
           </div>
           <div className="form-elem">
             <label>
@@ -42,6 +74,7 @@ function New(props) {
               <span style={{ fontSize: "0.7rem" }}>{currChar}/200</span>
             </label>
             <textarea
+              ref={(el) => (formDesc = el)}
               placeholder="Enter Description"
               maxLength="200"
               required
@@ -50,12 +83,32 @@ function New(props) {
           </div>
           <div className="form-elem">
             <label>Location</label>
-            <input placeholder="Longitute" type="text"></input>
-            <input placeholder="Latitude" type="text"></input>
+            <input
+              ref={(el) => (formLong = el)}
+              placeholder="Longitute"
+              type="number"
+              min="-90"
+              max="90"
+              step="0.0001"
+            ></input>
+            <input
+              ref={(el) => (formLat = el)}
+              placeholder="Latitude"
+              type="number"
+              min="-90"
+              max="90"
+              step="0.0001"
+            ></input>
           </div>
           <div className="form-elem">
             <label>Address</label>
-            <input placeholder="Enter address" type="text" required></input>
+            <input
+              ref={(el) => (formAddress = el)}
+              placeholder="Enter address"
+              type="text"
+              required
+              maxLength="60"
+            ></input>
           </div>
 
           <div className="modal_new_buttons">

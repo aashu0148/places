@@ -1,6 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
+
+const Place = require("../mongoose/mongoose").placeModel;
 
 const places = [
   {
@@ -31,13 +32,35 @@ const places = [
   },
 ];
 
-router.get("/:pid", (req, res, next) => {
+router.get("/:pid", async (req, res, next) => {
   const pid = req.params.pid;
-  const result = places.find((place) => place.id == pid);
-  res.json(result);
+  try {
+    const result = await Place.find({ _id: pid });
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    res.status(404);
+    res.json({ message: "Invalid Place id", error: err });
+  }
 });
-router.get("/", (req, res, next) => {
-  res.json(places);
+
+router.get("/", async (req, res, next) => {
+  res.json(await Place.find());
+});
+
+router.post("/", (req, res, noxt) => {
+  let { title, desc, image, location, address, author } = req.body;
+  let createdPlace = new Place({
+    title,
+    desc,
+    image,
+    location,
+    address,
+    author,
+  });
+  createdPlace.save();
+  places.push(createdPlace);
+  res.status(201).json({ done: "true" });
 });
 
 module.exports = router;

@@ -10,18 +10,20 @@ function Main(props) {
     fetch("/places")
       .then((res) => res.json())
       .then((data) => {
-        const result = data.map((e) => (
-          <Post
-            key={e.id}
-            image={e.image}
-            userPhoto="https://images.unsplash.com/photo-1519806141527-e3c35efe2c1c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60"
-            fav={props.favPlaces.includes(e.id) ? true : false}
-            title={e.title}
-            desc={e.desc}
-            address={e.address}
-            location={e.location}
-          />
-        ));
+        const result = data.map((e) => {
+          return (
+            <Post
+              key={e._id}
+              image={e.image}
+              userPhoto="https://images.unsplash.com/photo-1519806141527-e3c35efe2c1c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60"
+              fav={props.favPlaces.includes(e.id) ? true : false}
+              title={e.title}
+              desc={e.desc}
+              address={e.address}
+              location={e.location}
+            />
+          );
+        });
         setPlaces(result);
       })
       .catch((err) => {
@@ -33,7 +35,7 @@ function Main(props) {
   return (
     <div>
       {places}
-      <Post
+      {/* <Post
         image="https://cdn.pixabay.com/photo/2020/02/02/17/24/travel-4813658__340.jpg"
         userPhoto="https://images.unsplash.com/photo-1519806141527-e3c35efe2c1c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60"
         fav={false}
@@ -46,7 +48,7 @@ function Main(props) {
           long: 77.2295,
           lat: 28.612912,
         }}
-      />
+      /> */}
     </div>
   );
 }
