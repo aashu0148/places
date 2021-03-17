@@ -4,7 +4,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import "./style.css";
 
-function Auth() {
+function Auth(props) {
   const [comp, setComp] = useState("login");
 
   const switchComp = () => {
@@ -15,9 +15,9 @@ function Auth() {
   return (
     <div className="auth">
       {comp == "login" ? (
-        <Login switch={switchComp} />
+        <Login switch={switchComp} {...props} />
       ) : (
-        <Signup switch={switchComp} />
+        <Signup switch={switchComp} {...props} />
       )}
     </div>
   );

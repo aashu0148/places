@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -68,9 +69,18 @@ class Navbar extends Component {
             <li>
               <a onClick={() => this.setState({ showModal: true })}>New</a>
             </li>
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
+
+            {this.props.auth ? (
+              <li>
+                <NavLink style={{ textTransform: "capitalize" }} to="/">
+                  {this.props.name}
+                </NavLink>
+              </li>
+            ) : (
+              <li>
+                <NavLink to="/auth">Login</NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -78,4 +88,11 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    name: state.name,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

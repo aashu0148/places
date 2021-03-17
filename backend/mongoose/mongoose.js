@@ -15,6 +15,8 @@ const placeSchema = new schema({
 });
 const userSchema = new schema({
   name: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
   userPhoto: { type: String, required: true },
   fav: [{ type: String }],
   places: [{ type: String }],

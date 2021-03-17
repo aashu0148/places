@@ -33,9 +33,7 @@ function App() {
             <Navbar />
             <FavPlaces />
           </Route>
-          <Route path="/auth">
-            <Auth />
-          </Route>
+          <Route path="/auth" component={Auth} />
           <Route path="/">
             <Header />
             <Main />

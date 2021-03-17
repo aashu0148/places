@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 10px;
 }
 .auth::before {
   content: "";
@@ -16,7 +17,7 @@
   width: 100%;
   transition: 200ms;
   animation: animateAuth alternate;
-  animation-duration: 30s;
+  animation-duration: 40s;
   animation-iteration-count: infinite;
   background-size: cover;
   background-position: center center;
@@ -121,4 +122,11 @@
   font-size: 1.3rem;
   cursor: pointer;
   border-radius: 5px;
+}
+
+@media (max-width: 500px) {
+  .login,
+  .signup {
+    min-width: 350px;
+  }
 }

@@ -1,14 +1,49 @@
 import React from "react";
+import { connect } from "react-redux";
 
-let formPassword, formEmail, formName;
+let form, formButton, formErrorMsg, formPassword, formEmail, formName;
 function Signup(props) {
   const submission = (e) => {
     e.preventDefault();
+    let data = {
+      name: formName.value,
+      email: formEmail.value,
+      password: formPassword.value,
+    };
+    formButton.disabled = true;
+    fetch("/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async (res) => {
+        let body = await res.json();
+        formButton.disabled = false;
+        if (res.status >= 200 && res.status < 300) {
+          props.loginAction(
+            body.id,
+            body.name,
+            body.userPhoto,
+            body.places,
+            body.fav
+          );
+          form.reset();
+          props.history.push("/");
+        } else {
+          formErrorMsg.innerText = body.message;
+        }
+      })
+      .catch((err) => {
+        formButton.disabled = false;
+        formErrorMsg.innerText = "Error Connecting database : " + err;
+      });
   };
 
   return (
     <div className="signup">
-      <form onSubmit={(e) => submission(e)}>
+      <form ref={(el) => (form = el)} onSubmit={(e) => submission(e)}>
         <h1 className="signup_heading">Signup</h1>
         <div className="signup_form-elem">
           <label>Name</label>
@@ -43,14 +78,36 @@ function Signup(props) {
           ></input>
         </div>
         <div className="signup_bottom">
-          <button type="submit">Sign up</button>
+          <button ref={(el) => (formButton = el)} type="submit">
+            Sign up
+          </button>
           <p>
             {"Already a member ?"} <span onClick={props.switch}>Login</span>
           </p>
         </div>
+        <small
+          style={{
+            color: "yellow",
+            letterSpacing: "1px",
+            fontSize: "0.8rem",
+            fontWeight: "bold",
+          }}
+          ref={(el) => (formErrorMsg = el)}
+        ></small>
       </form>
     </div>
   );
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginAction: (id, name, photo, places, fav) =>
+      dispatch({ type: "LOGIN", id, name, photo, places, fav }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
