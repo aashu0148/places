@@ -12,6 +12,8 @@ const placeSchema = new schema({
     lat: { type: Number },
   },
   author: { type: String, required: true },
+  date: { type: Number, required: true },
+  love: { type: Number, required: true },
 });
 const userSchema = new schema({
   name: { type: String, required: true },

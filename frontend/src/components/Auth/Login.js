@@ -35,8 +35,9 @@ function Login(props) {
         formButton.disabled = false;
       })
       .catch((err) => {
-        formErrorMsg.innerText = "Error Connecting to database : " + err;
-        formButton.disabled = false;
+        if (formErrorMsg)
+          formErrorMsg.innerText = "Error Connecting to database : " + err;
+        if (formButton) formButton.disabled = false;
       });
   };
 

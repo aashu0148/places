@@ -25,8 +25,9 @@ function New(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     }).then((res) => {
-      window.location.reload(false);
       formForm.reset();
+      props.placeUpdateAction();
+      props.hide();
     });
   };
 
@@ -135,4 +136,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(New);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    placeUpdateAction: () => dispatch({ type: "PLACE_UPDATE" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(New);

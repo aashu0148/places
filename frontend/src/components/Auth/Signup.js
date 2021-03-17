@@ -36,8 +36,9 @@ function Signup(props) {
         }
       })
       .catch((err) => {
-        formButton.disabled = false;
-        formErrorMsg.innerText = "Error Connecting database : " + err;
+        if (formErrorMsg)
+          formErrorMsg.innerText = "Error Connecting database : " + err;
+        if (formButton) formButton.disabled = false;
       });
   };
 
