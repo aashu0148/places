@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 
 import "./New.css";
@@ -16,15 +17,16 @@ function New(props) {
         lat: formLat.value,
       },
       address: formAddress.value,
-      author: "dummy",
+      author: props.uid,
     };
+
     fetch("/places", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
     }).then((res) => {
-      formForm.reset();
       window.location.reload(false);
+      formForm.reset();
     });
   };
 
@@ -127,4 +129,10 @@ function New(props) {
   return ReactDOM.createPortal(content, document.getElementById("modal_new"));
 }
 
-export default New;
+const mapStateToProps = (state) => {
+  return {
+    uid: state.id,
+  };
+};
+
+export default connect(mapStateToProps)(New);

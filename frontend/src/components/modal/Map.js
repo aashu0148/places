@@ -42,7 +42,8 @@ function Map(props) {
       <div className="modal_map" onClick={(e) => e.stopPropagation()}>
         <div className="modal_map_head">Map</div>
         <h5>
-          Longitude : {props.long} , Latitude : {props.lat}
+          Longitude : {props.long} , Latitude : {props.lat} (May not be accurate
+          - user Provided)
         </h5>
         {props.long && props.lat ? (
           <div ref={mapContainer} className="modal_map_body"></div>

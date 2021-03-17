@@ -63,12 +63,20 @@ class Navbar extends Component {
             <li>
               <NavLink to="/users">All users</NavLink>
             </li>
-            <li>
-              <NavLink to="/my-places">My Places</NavLink>
-            </li>
-            <li>
-              <a onClick={() => this.setState({ showModal: true })}>New</a>
-            </li>
+            {this.props.auth ? (
+              <li>
+                <NavLink to="/my-places">My Places</NavLink>
+              </li>
+            ) : (
+              ""
+            )}
+            {this.props.auth ? (
+              <li>
+                <a onClick={() => this.setState({ showModal: true })}>New</a>
+              </li>
+            ) : (
+              ""
+            )}
 
             {this.props.auth ? (
               <li>

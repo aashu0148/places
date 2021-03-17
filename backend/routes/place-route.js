@@ -44,7 +44,7 @@ router.get("/:pid", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
-  res.json(await Place.find());
+  res.json(await Place.find({}, null, {}));
 });
 
 router.post("/", (req, res, noxt) => {
@@ -58,7 +58,6 @@ router.post("/", (req, res, noxt) => {
     author,
   });
   createdPlace.save();
-  places.push(createdPlace);
   res.status(201).json({ done: "true" });
 });
 

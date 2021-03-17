@@ -1,4 +1,7 @@
-.userPlaces_head{
-    margin:15px auto;
-    width: fit-content;
+.userPlaces_head {
+  margin: 15px auto;
+  width: fit-content;
+}
+.userPlaces_head h2 {
+  text-align: center;
 }

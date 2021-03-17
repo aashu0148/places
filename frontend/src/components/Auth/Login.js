@@ -30,7 +30,7 @@ function Login(props) {
           form.reset();
           props.history.push("/");
         } else {
-          formErrorMsg.innerText = body.message;
+          if (formErrorMsg) formErrorMsg.innerText = body.message;
         }
         formButton.disabled = false;
       })

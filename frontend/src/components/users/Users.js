@@ -22,7 +22,11 @@ function Users() {
             uid={e.id}
           />
         ));
-        setUsers(result);
+        if (data.length == 0) {
+          setUsers(<h2>No users available.</h2>);
+        } else {
+          setUsers(result);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -44,12 +48,6 @@ function Users() {
         </div>
       </div>
       {users}
-      <User
-        name="John"
-        places="12"
-        userPhoto="https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427__340.jpg"
-        uid="uid_9"
-      />
     </div>
   );
 }
