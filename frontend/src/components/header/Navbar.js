@@ -80,8 +80,12 @@ class Navbar extends Component {
 
             {this.props.auth ? (
               <li>
-                <NavLink style={{ textTransform: "capitalize" }} to="/">
-                  {this.props.name}
+                <NavLink
+                  onClick={this.props.logoutAction}
+                  style={{ textTransform: "capitalize" }}
+                  to="/"
+                >
+                  {this.props.name} Logout?
                 </NavLink>
               </li>
             ) : (
@@ -103,4 +107,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutAction: () => dispatch({ type: "LOGOUT" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

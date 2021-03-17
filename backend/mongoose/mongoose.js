@@ -12,6 +12,7 @@ const placeSchema = new schema({
     lat: { type: Number },
   },
   author: { type: String, required: true },
+  authorPhoto: { type: String, required: true },
   date: { type: Number, required: true },
   love: { type: Number, required: true },
 });

@@ -1,5 +1,8 @@
 import React from "react";
+import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
+
+import key from "../../secret";
 
 let form, formButton, formErrorMsg, formPassword, formEmail, formName;
 function Signup(props) {
@@ -30,6 +33,23 @@ function Signup(props) {
             body.fav
           );
           form.reset();
+
+          localStorage.removeItem("placesUser");
+          const token = jwt.sign(
+            {
+              id: body.id,
+              name: body.name,
+              userPhoto: body.userPhoto,
+              noOfPlaces: body.places.length,
+              fav: body.fav,
+            },
+            key,
+            {
+              expiresIn: "30s",
+            }
+          );
+          localStorage.setItem("placesUser", JSON.stringify(token));
+
           props.history.push("/");
         } else {
           if (formErrorMsg) formErrorMsg.innerText = body.message;

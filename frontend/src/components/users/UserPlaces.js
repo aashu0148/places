@@ -31,7 +31,7 @@ function UserPlaces(props) {
               <Post
                 key={place.id}
                 image={place.image}
-                userPhoto={userPhoto}
+                userPhoto={place.authorPhoto}
                 fav={false}
                 title={place.title}
                 desc={place.desc}

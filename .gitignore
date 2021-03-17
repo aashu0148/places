@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
 /frontend/node_modules
+/frontend/src/secret.js
 /backend/node_modules
 /backend/mongoUri.js

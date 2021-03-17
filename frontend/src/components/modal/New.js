@@ -18,6 +18,7 @@ function New(props) {
       },
       address: formAddress.value,
       author: props.uid,
+      authorPhoto: props.userPhoto,
     };
 
     fetch("/places", {
@@ -110,7 +111,7 @@ function New(props) {
               placeholder="Enter address"
               type="text"
               required
-              maxLength="60"
+              maxLength="80"
             ></input>
           </div>
 
@@ -133,6 +134,7 @@ function New(props) {
 const mapStateToProps = (state) => {
   return {
     uid: state.id,
+    userPhoto: state.userPhoto,
   };
 };
 

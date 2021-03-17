@@ -16,11 +16,11 @@ router.get("/:pid", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
-  res.json(await Place.find({}, null, { sort: { date: 1 } }));
+  res.json(await Place.find({}, null, { sort: { date: -1 } }));
 });
 
-router.post("/", (req, res, noxt) => {
-  let { title, desc, image, location, address, author } = req.body;
+router.post("/", (req, res, next) => {
+  let { title, desc, image, location, address, author, authorPhoto } = req.body;
   let createdPlace = new Place({
     title,
     desc,
@@ -28,7 +28,8 @@ router.post("/", (req, res, noxt) => {
     location,
     address,
     author,
-    date: new Date().getMilliseconds(),
+    authorPhoto,
+    date: new Date().getTime(),
     love: 0,
   });
   createdPlace.save().then(async (res) => {

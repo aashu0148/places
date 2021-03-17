@@ -7,7 +7,6 @@ import Post from "./Post";
 function Main(props) {
   const [places, setPlaces] = useState(<Spinner />);
   useEffect(() => {
-    console.log("use effect triggered");
     fetch("/places")
       .then((res) => res.json())
       .then((data) => {
@@ -16,7 +15,7 @@ function Main(props) {
             <Post
               key={e._id}
               image={e.image}
-              userPhoto="https://images.unsplash.com/photo-1519806141527-e3c35efe2c1c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60"
+              userPhoto={e.authorPhoto}
               fav={props.favPlaces.includes(e.id) ? true : false}
               title={e.title}
               desc={e.desc}

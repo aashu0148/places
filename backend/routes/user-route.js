@@ -5,23 +5,6 @@ const router = express.Router();
 const User = require("../mongoose/mongoose").userModel;
 const Place = require("../mongoose/mongoose").placeModel;
 
-const users = [
-  {
-    id: "uid_1",
-    name: "John",
-    places: ["pid_2"],
-    fav: [],
-    userPhoto: "",
-  },
-  {
-    id: "uid_2",
-    name: "sonu",
-    places: ["pid_1"],
-    fav: ["pid_2"],
-    userPhoto: "",
-  },
-];
-
 router.get("/:uid", async (req, res, next) => {
   const uid = req.params.uid;
   const result = await User.find({ _id: uid }, "-password");
