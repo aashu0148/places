@@ -26,12 +26,18 @@ const reducer = (state = initialState, action) => {
       myState.name = action.name;
       myState.fav = action.fav;
       myState.userPhoto = action.userPhoto;
-      myState.dummy = 0;
       return myState;
     }
     case "PLACE_UPDATE": {
       let myState = { ...state };
       myState.dummy = state.dummy + 1;
+      return myState;
+    }
+
+    case "UPDATE_FAV_PLACES": {
+      let myState = { ...state };
+      myState.fav = action.fav;
+      myState.dummy = state.dummy + 10;
       return myState;
     }
     case "LOGOUT": {

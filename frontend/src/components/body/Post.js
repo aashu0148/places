@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Map from "../modal/Map";
 
@@ -15,11 +15,27 @@ function Post(props) {
   const [fav, setFav] = useState(props.fav);
   const [mapOpen, setMapOpen] = useState(false);
 
-  const UpdateFav = (id, isFav) => {
+  useEffect(() => {
+    setFav(props.fav);
+  }, [props]);
+
+  const UpdateFav = (uid, pid, isFav, favPlaces) => {
     clearTimeout(requestTimer);
     requestTimer = setTimeout(() => {
-      // fetch()
-    }, 2000);
+      if (isFav && !favPlaces.includes(pid)) {
+        favPlaces.push(pid);
+      } else if (!isFav && favPlaces.includes(pid)) {
+        favPlaces.splice(favPlaces.indexOf(pid), 1);
+      }
+
+      fetch(`/users/${uid}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(favPlaces),
+      }).then(() => {
+        props.updateFavPlacesAction(favPlaces);
+      });
+    }, 1500);
   };
 
   return (
@@ -33,7 +49,7 @@ function Post(props) {
       <div className="post_head">
         <div
           onClick={() => {
-            UpdateFav(props.id, !fav);
+            UpdateFav(props.uid, props.id, !fav, props.favPlaces);
             setFav(!fav);
           }}
           className="post_favorite"
@@ -69,8 +85,16 @@ function Post(props) {
 const mapStateToProps = (state) => {
   return {
     uid: state.id,
-    favplaces: state.fav,
+    favPlaces: state.fav,
   };
 };
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateFavPlacesAction: (favPlaces) => {
+      dispatch({ type: "UPDATE_FAV_PLACES", fav: favPlaces });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

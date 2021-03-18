@@ -19,6 +19,7 @@ function App(props) {
   jwt.verify(token, key, (err, data) => {
     if (err) {
       localStorage.removeItem("placesUser");
+      props.logoutAction();
     } else {
       fetch(`/users/${data.id}`)
         .then((res) => res.json())
@@ -68,8 +69,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    autoLoginAction: (id, name, userPhoto, places, fav) =>
+    autoLoginAction: (id, name, userPhoto, fav) =>
       dispatch({ type: "AUTO_LOGIN", id, name, userPhoto, fav }),
+
+    logoutAction: () => dispatch({ type: "LOGOUT" }),
   };
 };
 

@@ -39,4 +39,12 @@ router.get("/", async (req, res, next) => {
   res.json(result.map((user) => user.toObject({ getters: true })));
 });
 
+router.post("/:uid", async (req, res, next) => {
+  const uid = req.params.uid;
+  const favPlaces = req.body;
+  const result = await User.findOne({ _id: uid });
+  result.fav = favPlaces;
+  result.save().then(() => res.json({ done: "true" }));
+});
+
 module.exports = router;
