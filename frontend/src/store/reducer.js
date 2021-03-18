@@ -2,7 +2,7 @@ const initialState = {
   auth: false,
   id: "",
   name: "",
-  noOfPlaces: 0,
+  dummy: 0,
   fav: [],
   userPhoto: "",
 };
@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
       myState.name = action.name;
       myState.fav = action.fav;
       myState.userPhoto = action.photo;
-      myState.noOfPlaces = action.places.length;
+      myState.dummy = 0;
       return myState;
     }
     case "AUTO_LOGIN": {
@@ -26,12 +26,12 @@ const reducer = (state = initialState, action) => {
       myState.name = action.name;
       myState.fav = action.fav;
       myState.userPhoto = action.userPhoto;
-      myState.noOfPlaces = action.noOfPlaces;
+      myState.dummy = 0;
       return myState;
     }
     case "PLACE_UPDATE": {
       let myState = { ...state };
-      myState.noOfPlaces = state.noOfPlaces + 1;
+      myState.dummy = state.dummy + 1;
       return myState;
     }
     case "LOGOUT": {
@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       myState.name = "";
       myState.fav = [];
       myState.userPhoto = "";
-      myState.noOfPlaces = 0;
+      myState.dummy = 0;
       return myState;
     }
     default:

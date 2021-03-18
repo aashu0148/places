@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
 import Map from "../modal/Map";
 
 import RoomIcon from "@material-ui/icons/Room";
@@ -9,9 +10,17 @@ import { Avatar } from "@material-ui/core";
 
 import "./Post.css";
 
+let requestTimer;
 function Post(props) {
   const [fav, setFav] = useState(props.fav);
   const [mapOpen, setMapOpen] = useState(false);
+
+  const UpdateFav = (id, isFav) => {
+    clearTimeout(requestTimer);
+    requestTimer = setTimeout(() => {
+      // fetch()
+    }, 2000);
+  };
 
   return (
     <div className="post">
@@ -22,7 +31,13 @@ function Post(props) {
         hide={() => setMapOpen(false)}
       />
       <div className="post_head">
-        <div onClick={() => setFav(!fav)} className="post_favorite">
+        <div
+          onClick={() => {
+            UpdateFav(props.id, !fav);
+            setFav(!fav);
+          }}
+          className="post_favorite"
+        >
           {fav ? (
             <HeartIcon color="secondary" />
           ) : (
@@ -51,4 +66,11 @@ function Post(props) {
   );
 }
 
-export default Post;
+const mapStateToProps = (state) => {
+  return {
+    uid: state.id,
+    favplaces: state.fav,
+  };
+};
+
+export default connect(mapStateToProps)(Post);

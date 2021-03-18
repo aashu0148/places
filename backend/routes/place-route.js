@@ -32,12 +32,7 @@ router.post("/", (req, res, next) => {
     date: new Date().getTime(),
     love: 0,
   });
-  createdPlace.save().then(async (res) => {
-    let id = res._id;
-    const user = await User.findOne({ _id: author });
-    user.places.push(id);
-    user.save();
-  });
+  createdPlace.save();
 
   res.status(201).json({ done: "true" });
 });

@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const router = express.Router();
 
 const User = require("../mongoose/mongoose").userModel;
@@ -7,14 +6,25 @@ const Place = require("../mongoose/mongoose").placeModel;
 
 router.get("/:uid", async (req, res, next) => {
   const uid = req.params.uid;
-  const result = await User.find({ _id: uid }, "-password");
-  res.json(result[0].toObject({ getters: true }));
+  let result;
+  try {
+    result = await User.find({ _id: uid }, "-password");
+  } catch {
+    res.status(404);
+    res.json({ message: "User not found :(" });
+  }
+  if (result.length == 0) {
+    res.status(404);
+    res.json({ message: "User not found :(" });
+  } else {
+    res.status(200);
+    res.json(result[0].toObject({ getters: true }));
+  }
 });
 
-router.post("/places", async (req, res, next) => {
-  const query = req.body.map((e) => mongoose.Types.ObjectId(e));
-
-  const result = await Place.find({ _id: { $in: query } });
+router.get("/:uid/places", async (req, res, next) => {
+  const uid = req.params.uid;
+  const result = await Place.find({ author: uid });
   if (result.length == 0) {
     res.status(404);
     res.json({ message: "No places found." });
@@ -23,6 +33,7 @@ router.post("/places", async (req, res, next) => {
     res.json(result.map((place) => place.toObject({ getters: true })));
   }
 });
+
 router.get("/", async (req, res, next) => {
   const result = await User.find({}, "-password");
   res.json(result.map((user) => user.toObject({ getters: true })));

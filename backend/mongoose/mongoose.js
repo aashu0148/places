@@ -22,7 +22,6 @@ const userSchema = new schema({
   password: { type: String, required: true },
   userPhoto: { type: String, required: true },
   fav: [{ type: String }],
-  places: [{ type: String }],
 });
 
 exports.placeModel = mongoose.model("place", placeSchema);

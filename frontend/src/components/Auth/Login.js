@@ -26,7 +26,6 @@ function Login(props) {
             body.id,
             body.name,
             body.userPhoto,
-            body.places,
             body.fav
           );
           form.reset();
@@ -36,9 +35,6 @@ function Login(props) {
             {
               id: body.id,
               name: body.name,
-              userPhoto: body.userPhoto,
-              noOfPlaces: body.places.length,
-              fav: body.fav,
             },
             key,
             {
@@ -114,8 +110,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginAction: (id, name, photo, places, fav) =>
-      dispatch({ type: "LOGIN", id, name, photo, places, fav }),
+    loginAction: (id, name, photo, fav) =>
+      dispatch({ type: "LOGIN", id, name, photo, fav }),
   };
 };
 

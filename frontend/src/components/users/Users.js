@@ -14,13 +14,7 @@ function Users() {
       .then((res) => res.json())
       .then((data) => {
         const result = data.map((e) => (
-          <User
-            key={e.id}
-            name={e.name}
-            places={e.places.length}
-            userPhoto={e.userPhoto}
-            uid={e.id}
-          />
+          <User key={e.id} name={e.name} userPhoto={e.userPhoto} uid={e.id} />
         ));
         if (data.length == 0) {
           setUsers(<h2>No users available.</h2>);
@@ -29,7 +23,6 @@ function Users() {
         }
       })
       .catch((err) => {
-        console.error(err);
         setUsers(<h2>Can't connect to the server :(</h2>);
       });
   }, []);

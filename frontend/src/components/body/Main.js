@@ -14,6 +14,7 @@ function Main(props) {
           return (
             <Post
               key={e._id}
+              id={e._id}
               image={e.image}
               userPhoto={e.authorPhoto}
               fav={props.favPlaces.includes(e.id) ? true : false}
@@ -30,7 +31,7 @@ function Main(props) {
         console.error(err);
         setPlaces(<h2>Could not connect to the server :(</h2>);
       });
-  }, [props.noOfPlaces]);
+  }, [props.dummy]);
 
   return <div>{places}</div>;
 }
@@ -41,7 +42,7 @@ const mapStateToProps = (state) => {
     userPhoto: state.userPhoto,
     uid: state.id,
     name: state.name,
-    noOfPlaces: state.noOfPlaces,
+    dummy: state.dummy,
   };
 };
 

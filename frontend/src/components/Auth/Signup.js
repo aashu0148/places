@@ -25,13 +25,7 @@ function Signup(props) {
         let body = await res.json();
         formButton.disabled = false;
         if (res.status >= 200 && res.status < 300) {
-          props.loginAction(
-            body.id,
-            body.name,
-            body.userPhoto,
-            body.places,
-            body.fav
-          );
+          props.loginAction(body.id, body.name, body.userPhoto, body.fav);
           form.reset();
 
           localStorage.removeItem("placesUser");
@@ -39,9 +33,6 @@ function Signup(props) {
             {
               id: body.id,
               name: body.name,
-              userPhoto: body.userPhoto,
-              noOfPlaces: body.places.length,
-              fav: body.fav,
             },
             key,
             {
@@ -126,8 +117,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginAction: (id, name, photo, places, fav) =>
-      dispatch({ type: "LOGIN", id, name, photo, places, fav }),
+    loginAction: (id, name, photo, fav) =>
+      dispatch({ type: "LOGIN", id, name, photo, fav }),
   };
 };
 

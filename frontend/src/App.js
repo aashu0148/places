@@ -20,13 +20,11 @@ function App(props) {
     if (err) {
       localStorage.removeItem("placesUser");
     } else {
-      props.autoLoginAction(
-        data.id,
-        data.name,
-        data.userPhoto,
-        data.noOfPlaces,
-        data.fav
-      );
+      fetch(`/users/${data.id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          props.autoLoginAction(res.id, res.name, res.userPhoto, res.fav);
+        });
     }
   });
 
@@ -70,8 +68,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    autoLoginAction: (id, name, userPhoto, noOfPlaces, fav) =>
-      dispatch({ type: "AUTO_LOGIN", id, name, userPhoto, noOfPlaces, fav }),
+    autoLoginAction: (id, name, userPhoto, places, fav) =>
+      dispatch({ type: "AUTO_LOGIN", id, name, userPhoto, fav }),
   };
 };
 
