@@ -26,6 +26,7 @@ function UserPlaces(props) {
           let result = data.map((place) => (
             <Post
               key={place.id}
+              id={place.id}
               image={place.image}
               userPhoto={place.authorPhoto}
               fav={false}

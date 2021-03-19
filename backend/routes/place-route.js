@@ -39,12 +39,13 @@ router.post("/", (req, res, next) => {
 
 router.post("/fav", async (req, res, next) => {
   const body = req.body;
+
   const query = body.map((e) => mongoose.Types.ObjectId(e));
   const result = await Place.find({ _id: { $in: query } });
 
   if (result.length == 0) {
     res.status(404);
-    res.json({ message: "No favorite places.", error: err });
+    res.json({ message: "No favorite places." });
   } else {
     res.status(200);
     res.json(result);

@@ -42,6 +42,7 @@ router.get("/", async (req, res, next) => {
 router.post("/:uid", async (req, res, next) => {
   const uid = req.params.uid;
   const favPlaces = req.body;
+  if (!favPlaces) return;
   const result = await User.findOne({ _id: uid });
   result.fav = favPlaces;
   result.save().then(() => res.json({ done: "true" }));
