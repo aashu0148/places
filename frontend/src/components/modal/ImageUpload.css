@@ -1,0 +1,24 @@
+.image-upload {
+  height: 180px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid rgb(156, 156, 156);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.image-upload_preview {
+  height: 150px;
+  overflow-y: scroll;
+  width: 100%;
+}
+.image-upload button {
+  cursor: pointer;
+}
+.image-upload img {
+  width: 100%;
+}
+.image-upload input {
+  display: none;
+}

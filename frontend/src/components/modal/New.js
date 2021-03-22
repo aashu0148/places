@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 
+import ImageUpload from "./ImageUpload";
 import "./New.css";
+
 function New(props) {
   const [currChar, setcurrChar] = useState(0);
   let formForm, formAddress, formDesc, formTitle, formLat, formLong, formImage;
@@ -73,6 +75,10 @@ function New(props) {
             ></input>
           </div>
           <div className="form-elem">
+            <label>Image</label>
+            <ImageUpload />
+          </div>
+          <div className="form-elem">
             <label>
               Description{" "}
               <span style={{ fontSize: "0.7rem" }}>{currChar}/200</span>
@@ -87,22 +93,24 @@ function New(props) {
           </div>
           <div className="form-elem">
             <label>Location</label>
-            <input
-              ref={(el) => (formLong = el)}
-              placeholder="Longitute"
-              type="number"
-              min="-90"
-              max="90"
-              step="0.0001"
-            ></input>
-            <input
-              ref={(el) => (formLat = el)}
-              placeholder="Latitude"
-              type="number"
-              min="-90"
-              max="90"
-              step="0.0001"
-            ></input>
+            <div className="modal_new_location">
+              <input
+                ref={(el) => (formLong = el)}
+                placeholder="Longitute"
+                type="number"
+                min="-90"
+                max="90"
+                step="0.0001"
+              ></input>
+              <input
+                ref={(el) => (formLat = el)}
+                placeholder="Latitude"
+                type="number"
+                min="-90"
+                max="90"
+                step="0.0001"
+              ></input>
+            </div>
           </div>
           <div className="form-elem">
             <label>Address</label>

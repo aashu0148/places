@@ -19,6 +19,8 @@
   max-width: 700px;
   background: #fff;
   border: 1px solid;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 .modal_new_head {
   font-size: 2rem;
@@ -46,15 +48,23 @@
   background-color: transparent;
   outline: none;
   transition: 400ms;
-  border-radius: 5px;
   letter-spacing: 1px;
   margin: 2px;
   min-width: 250px;
+  border-radius: 5px;
   border: 1px solid rgb(156, 156, 156);
 }
 .form-elem textarea {
-  height: 100px;
+  height: 160px;
   width: 100%;
+}
+.modal_new_location {
+  display: flex;
+  width: 250px;
+}
+.modal_new_location input {
+  min-width: 0;
+  flex: 1;
 }
 .form-elem input:focus,
 .form-elem textarea:focus {
