@@ -60,7 +60,10 @@ function Post(props) {
             <HeartHollowIcon color="secondary" />
           )}
         </div>
-        <img src={props.image} alt={`${props.title} Picture`} />
+        <img
+          src={"http://localhost:5000/" + props.image}
+          alt={`${props.title} Picture`}
+        />
       </div>
       <div className="post_footer">
         <div className="post_footer-user">

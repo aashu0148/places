@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 
@@ -6,32 +6,47 @@ import ImageUpload from "./ImageUpload";
 import "./New.css";
 
 function New(props) {
+  const errorMsg = useRef();
+  const submitButton = useRef();
   const [currChar, setcurrChar] = useState(0);
+  const [file, setFile] = useState();
   let formForm, formAddress, formDesc, formTitle, formLat, formLong, formImage;
   const submission = (e) => {
     e.preventDefault();
-    let obj = {
-      title: formTitle.value,
-      desc: formDesc.value,
-      image: formImage.value,
-      location: {
-        long: formLong.value,
-        lat: formLat.value,
-      },
-      address: formAddress.value,
-      author: props.uid,
-      authorPhoto: props.userPhoto,
-    };
+
+    if (!file) {
+      errorMsg.current.innerText = "Please select an image.";
+      return;
+    } else {
+      errorMsg.current.innerText = "";
+    }
+    submitButton.current.disabled = true;
+    const formData = new FormData();
+    formData.append("title", formTitle.value);
+    formData.append("desc", formDesc.value);
+    formData.append("location", {
+      long: formLong.value,
+      lat: formLat.value,
+    });
+    formData.append("address", formAddress.value);
+    formData.append("author", props.uid);
+    formData.append("authorPhoto", props.userPhoto);
+    formData.append("image", file);
 
     fetch("/places", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(obj),
-    }).then((res) => {
-      formForm.reset();
-      props.placeUpdateAction();
-      props.hide();
-    });
+      body: formData,
+    })
+      .then((res) => {
+        formForm.reset();
+        props.placeUpdateAction();
+        submitButton.current.disabled = false;
+        props.hide();
+      })
+      .catch((err) => {
+        submitButton.current.disabled = false;
+        errorMsg.current.innerText = "Error while creating new Post :(";
+      });
   };
 
   const content = (
@@ -66,32 +81,6 @@ function New(props) {
             ></input>
           </div>
           <div className="form-elem">
-            <label>Image URL</label>
-            <input
-              ref={(el) => (formImage = el)}
-              placeholder="Enter Image url"
-              type="text"
-              required
-            ></input>
-          </div>
-          <div className="form-elem">
-            <label>Image</label>
-            <ImageUpload />
-          </div>
-          <div className="form-elem">
-            <label>
-              Description{" "}
-              <span style={{ fontSize: "0.7rem" }}>{currChar}/200</span>
-            </label>
-            <textarea
-              ref={(el) => (formDesc = el)}
-              placeholder="Enter Description"
-              maxLength="200"
-              required
-              onChange={(e) => setcurrChar(e.target.value.length)}
-            ></textarea>
-          </div>
-          <div className="form-elem">
             <label>Location</label>
             <div className="modal_new_location">
               <input
@@ -113,6 +102,28 @@ function New(props) {
             </div>
           </div>
           <div className="form-elem">
+            <label>Image</label>
+            <ImageUpload
+              onInput={(file) => {
+                setFile(file);
+              }}
+            />
+          </div>
+          <div className="form-elem">
+            <label>
+              Description{" "}
+              <span style={{ fontSize: "0.7rem" }}>{currChar}/200</span>
+            </label>
+            <textarea
+              ref={(el) => (formDesc = el)}
+              placeholder="Enter Description"
+              maxLength="200"
+              required
+              onChange={(e) => setcurrChar(e.target.value.length)}
+            ></textarea>
+          </div>
+
+          <div className="form-elem">
             <label>Address</label>
             <input
               ref={(el) => (formAddress = el)}
@@ -127,11 +138,24 @@ function New(props) {
             <div className="btn-close" onClick={props.hide}>
               Close
             </div>
-            <button className="btn-submit" type="submit">
+            <button ref={submitButton} className="btn-submit" type="submit">
               Submit
             </button>
           </div>
         </form>
+        <small
+          ref={errorMsg}
+          style={{
+            fontWeight: "bold",
+            color: "red",
+            fontSize: "0.9rem",
+            letterSpacing: "1px",
+            padding: "0 4px",
+            display: "block",
+            width: "fit-content",
+            margin: "0 auto",
+          }}
+        ></small>
       </div>
     </div>
   );

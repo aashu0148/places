@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 
 const Place = require("../mongoose/mongoose").placeModel;
+const fileUpload = require("../multer/multer");
 
 router.get("/:pid", async (req, res, next) => {
   const pid = req.params.pid;
@@ -19,12 +20,12 @@ router.get("/", async (req, res, next) => {
   res.json(await Place.find({}, null, { sort: { date: -1 } }));
 });
 
-router.post("/", (req, res, next) => {
-  let { title, desc, image, location, address, author, authorPhoto } = req.body;
+router.post("/", fileUpload.single("image"), (req, res, next) => {
+  let { title, desc, location, address, author, authorPhoto } = req.body;
   let createdPlace = new Place({
     title,
     desc,
-    image,
+    image: req.file.path,
     location,
     address,
     author,
