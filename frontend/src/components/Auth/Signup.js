@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 
+import ImageUpload from "../modal/ImageUpload";
 import key from "../../secret";
 
 let form, formButton, formErrorMsg, formPassword, formEmail, formName;
 function Signup(props) {
+  const [file, setFile] = useState();
   const submission = (e) => {
     e.preventDefault();
-    let data = {
-      name: formName.value,
-      email: formEmail.value,
-      password: formPassword.value,
-    };
+    if (!file) {
+      formErrorMsg.innerText = "Please select an Image.";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", formName.value);
+    formData.append("email", formEmail.value);
+    formData.append("password", formPassword.value);
+    formData.append("image", file);
+
     formButton.disabled = true;
     fetch("/auth/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
       .then(async (res) => {
         let body = await res.json();
@@ -66,6 +71,10 @@ function Signup(props) {
             area-required="true"
             ref={(el) => (formName = el)}
           ></input>
+        </div>
+        <div className="signup_form-elem">
+          <label>Profile Image</label>
+          <ImageUpload onInput={(file) => setFile(file)} />
         </div>
         <div className="signup_form-elem">
           <label>Email</label>

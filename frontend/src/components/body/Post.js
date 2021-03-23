@@ -67,7 +67,7 @@ function Post(props) {
       </div>
       <div className="post_footer">
         <div className="post_footer-user">
-          <Avatar src={props.userPhoto} />
+          <Avatar src={"http://localhost:5000/" + props.userPhoto} />
         </div>
         <div className="post_footer-content">
           <h2 className="post_title">{props.title}</h2>

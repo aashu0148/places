@@ -45,7 +45,10 @@ function UserPlaces(props) {
   return (
     <div className="userPlaces">
       <div className="userPlaces_head">
-        <Avatar style={{ width: "200px", height: "200px" }} src={userPhoto} />
+        <Avatar
+          style={{ width: "200px", height: "200px" }}
+          src={"http://localhost:5000/" + userPhoto}
+        />
         <h2>{userName}</h2>
       </div>
       <br />

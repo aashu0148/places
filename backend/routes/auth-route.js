@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
+const fileUpload = require("../multer/multer");
 const User = require("../mongoose/mongoose").userModel;
 
 router.post("/login", async (req, res, next) => {
@@ -31,19 +32,17 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", fileUpload.single("image"), async (req, res, next) => {
   let data = req.body;
   let createdUser = new User({
     ...data,
-    userPhoto:
-      "https://cdn.pixabay.com/photo/2014/11/29/19/33/bald-eagle-550804__340.jpg",
+    userPhoto: req.file.path,
     places: [],
     fav: [],
   });
 
   const result = await User.find({ email: data.email });
   if (result.length > 0) {
-    console.log(result);
     res.status(404);
     res.json({
       message: "User email already exists. Try to login.",

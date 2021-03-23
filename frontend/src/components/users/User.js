@@ -12,7 +12,7 @@ function user(props) {
     >
       <div className="user">
         <div className="user_head">
-          <Avatar src={props.userPhoto} />
+          <Avatar src={"http://localhost:5000/" + props.userPhoto} />
           <h3 className="user_title">{props.name}</h3>
         </div>
         {/* <div className="user_places">{props.places} Places</div> */}
