@@ -28,6 +28,8 @@ function Post(props) {
         favPlaces.splice(favPlaces.indexOf(pid), 1);
       }
 
+      fetch(`/places/${pid}/love/${isFav ? 1 : -1}`);
+
       fetch(`/users/${uid}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +37,7 @@ function Post(props) {
       }).then(() => {
         props.updateFavPlacesAction(favPlaces);
       });
-    }, 1500);
+    }, 2000);
   };
 
   return (

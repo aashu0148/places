@@ -45,7 +45,7 @@ function Users() {
           setUsers(<h2>No users available with name = {search}</h2>);
         }
       });
-    }, 800);
+    }, 400);
   };
 
   useEffect(() => {

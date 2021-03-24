@@ -1,6 +1,6 @@
-.header{
-    height:100vh;
-    width:100%;
-    background-color: rgb(125, 241, 193);
-    /* overflow-y: hidden; */
+.header {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  overflow-y: hidden;
 }

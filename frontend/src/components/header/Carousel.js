@@ -1,23 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Carousel } from "react-responsive-carousel";
+import { Avatar } from "@material-ui/core";
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import "./Carousel.css";
 
-function Carousel() {
+function Crsl() {
+  const [carouselInner, setCarouselInner] = useState();
+
+  useEffect(() => {
+    fetch("/places/top").then(async (res) => {
+      const data = await res.json();
+
+      const result = data.map((e, i) => (
+        <div key={i} className="carousel_item">
+          <img src={e.image} />
+          <div className="carousel_info">
+            <Avatar src={e.authorPhoto} />
+
+            <div className="carousel_info_content">
+              <p>{e.title}</p>
+              <div className="carousel_desc">{e.desc}</div>
+            </div>
+          </div>
+        </div>
+      ));
+      setCarouselInner(result);
+    });
+  }, []);
+
   return (
-    <div className="carousel_outer">
-      <div className="carousel">
-        <div className="carousel_item">
-          <img src="https://cdn.pixabay.com/photo/2019/12/10/10/53/architecture-4685608__340.jpg" />
-        </div>
-        <div className="carousel_item">
-          <img src="https://cdn.pixabay.com/photo/2018/01/21/01/46/architecture-3095716__340.jpg" />
-        </div>
-        <div className="carousel_item">
-          <img src="https://cdn.pixabay.com/photo/2013/04/07/21/29/monument-101632__340.jpg" />
-        </div>
-      </div>
-    </div>
+    <Carousel
+      showArrows
+      autoPlay
+      infiniteLoop
+      showStatus={false}
+      useKeyboardArrows
+      emulateTouch
+      stopOnHover
+    >
+      {carouselInner}
+    </Carousel>
   );
 }
 
-export default Carousel;
+export default Crsl;
