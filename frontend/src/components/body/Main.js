@@ -7,7 +7,7 @@ import Post from "./Post";
 function Main(props) {
   const [places, setPlaces] = useState(<Spinner />);
   useEffect(() => {
-    fetch("/places")
+    fetch("http://localhost:5000/places")
       .then((res) => res.json())
       .then((data) => {
         const result = data.map((e) => {
