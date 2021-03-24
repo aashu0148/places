@@ -39,6 +39,19 @@ router.get("/", async (req, res, next) => {
   res.json(result.map((user) => user.toObject({ getters: true })));
 });
 
+router.get("/search/:searchId", async (req, res, next) => {
+  const searchId = req.params.searchId;
+  const query = new RegExp(searchId, "i");
+  const result = await User.find({ name: query }, "-password");
+  if (result.length == 0) {
+    res.status(404);
+    res.json({ message: "No users found." });
+  } else {
+    res.status(200);
+    res.json(result.map((user) => user.toObject({ getters: true })));
+  }
+});
+
 router.post("/:uid", async (req, res, next) => {
   const uid = req.params.uid;
   const favPlaces = req.body;

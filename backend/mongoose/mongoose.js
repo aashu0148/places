@@ -16,6 +16,7 @@ const placeSchema = new schema({
   date: { type: Number, required: true },
   love: { type: Number, required: true },
 });
+
 const userSchema = new schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
@@ -23,6 +24,7 @@ const userSchema = new schema({
   userPhoto: { type: String, required: true },
   fav: [{ type: String }],
 });
+userSchema.index({ name: "text" });
 
 exports.placeModel = mongoose.model("place", placeSchema);
 exports.userModel = mongoose.model("user", userSchema);
