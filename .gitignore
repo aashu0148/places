@@ -4,3 +4,4 @@
 /frontend/src/secret.js
 /backend/node_modules
 /backend/mongoUri.js
+/backend/uploads/image

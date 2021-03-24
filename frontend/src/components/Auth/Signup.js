@@ -41,7 +41,7 @@ function Signup(props) {
             },
             key,
             {
-              expiresIn: "30s",
+              expiresIn: "5d",
             }
           );
           localStorage.setItem("placesUser", JSON.stringify(token));

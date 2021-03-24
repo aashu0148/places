@@ -22,11 +22,13 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", fileUpload.single("image"), (req, res, next) => {
   let { title, desc, location, address, author, authorPhoto } = req.body;
+
+  const lco = JSON.parse(location);
   let createdPlace = new Place({
     title,
     desc,
+    location: lco,
     image: req.file.path,
-    location,
     address,
     author,
     authorPhoto,

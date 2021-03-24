@@ -65,7 +65,7 @@ class Navbar extends Component {
             </li>
             {this.props.auth ? (
               <li>
-                <NavLink to="/my-places">My Places</NavLink>
+                <NavLink to="/my-places">Fav Places</NavLink>
               </li>
             ) : (
               ""

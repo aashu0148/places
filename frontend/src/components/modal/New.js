@@ -24,10 +24,13 @@ function New(props) {
     const formData = new FormData();
     formData.append("title", formTitle.value);
     formData.append("desc", formDesc.value);
-    formData.append("location", {
-      long: formLong.value,
-      lat: formLat.value,
-    });
+    formData.append(
+      "location",
+      JSON.stringify({
+        long: formLong.value,
+        lat: formLat.value,
+      })
+    );
     formData.append("address", formAddress.value);
     formData.append("author", props.uid);
     formData.append("authorPhoto", props.userPhoto);
